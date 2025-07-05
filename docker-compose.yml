@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  fbx-converter:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MAX_FILE_SIZE=104857600  # 100MB
+      - SESSION_TIMEOUT=3600     # 1 hour
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  uploads:
+  outputs:

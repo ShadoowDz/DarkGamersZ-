@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FBX to CS 1.6 MDL Converter</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-cube"></i> FBX to CS 1.6 MDL Converter</h1>
+            <p>Convert your FBX files to Counter-Strike 1.6 compatible MDL format</p>
+        </header>
+
+        <main>
+            <div class="converter-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Drop your FBX file here</h3>
+                        <p>or <span class="browse-text">browse files</span></p>
+                        <input type="file" id="fileInput" accept=".fbx" style="display: none;">
+                    </div>
+                </div>
+
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <div class="file-details">
+                        <i class="fas fa-file-archive"></i>
+                        <div class="file-text">
+                            <span class="file-name" id="fileName"></span>
+                            <span class="file-size" id="fileSize"></span>
+                        </div>
+                        <button class="remove-file" id="removeFile">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="conversion-options">
+                    <h3>Conversion Settings</h3>
+                    <div class="options-grid">
+                        <div class="option">
+                            <label for="optimizeVertices">
+                                <input type="checkbox" id="optimizeVertices" checked>
+                                Optimize vertices for CS 1.6 (max 2048)
+                            </label>
+                        </div>
+                        <div class="option">
+                            <label for="optimizeTextures">
+                                <input type="checkbox" id="optimizeTextures" checked>
+                                Convert textures to indexed BMP
+                            </label>
+                        </div>
+                        <div class="option">
+                            <label for="simplifyBones">
+                                <input type="checkbox" id="simplifyBones" checked>
+                                Simplify bone hierarchy (max 128 bones)
+                            </label>
+                        </div>
+                        <div class="option">
+                            <label for="convertAnimations">
+                                <input type="checkbox" id="convertAnimations" checked>
+                                Convert animations to CS 1.6 format
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="convert-btn" id="convertBtn" disabled>
+                    <i class="fas fa-magic"></i>
+                    Convert to MDL
+                </button>
+
+                <div class="progress-section" id="progressSection" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Processing...</div>
+                </div>
+
+                <div class="result-section" id="resultSection" style="display: none;">
+                    <div class="result-content">
+                        <div class="result-success" id="resultSuccess" style="display: none;">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>Conversion Completed!</h3>
+                            <div class="conversion-stats" id="conversionStats"></div>
+                            <div class="warnings" id="warnings" style="display: none;"></div>
+                            <button class="download-btn" id="downloadBtn">
+                                <i class="fas fa-download"></i>
+                                Download MDL File
+                            </button>
+                        </div>
+                        
+                        <div class="result-error" id="resultError" style="display: none;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h3>Conversion Failed</h3>
+                            <div class="error-message" id="errorMessage"></div>
+                            <button class="retry-btn" id="retryBtn">
+                                <i class="fas fa-redo"></i>
+                                Try Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-cards">
+                    <div class="info-card">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>About CS 1.6 MDL Format</h3>
+                        <ul>
+                            <li>Maximum 2048 vertices per model</li>
+                            <li>Maximum 4080 triangles</li>
+                            <li>Maximum 128 bones</li>
+                            <li>8-bit indexed BMP textures only</li>
+                            <li>Hard vertex weighting (no soft skinning)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Important Notes</h3>
+                        <ul>
+                            <li>Modern FBX features may be simplified</li>
+                            <li>Complex materials will be converted to basic ones</li>
+                            <li>Animations may be optimized or truncated</li>
+                            <li>Large models will be automatically decimated</li>
+                            <li>Textures will be resized to 512x512 maximum</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Supported Features</h3>
+                        <ul>
+                            <li>Static and animated meshes</li>
+                            <li>Bone hierarchies and skinning</li>
+                            <li>Multiple animation sequences</li>
+                            <li>Basic materials and textures</li>
+                            <li>Automatic optimization for CS 1.6</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 FBX to CS 1.6 MDL Converter - Built for the Counter-Strike community</p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
